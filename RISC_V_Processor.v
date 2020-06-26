@@ -33,7 +33,6 @@ wire [63:0]data_out1;
 wire [63:0]data_out2;
 
 wire [63:0]imm_data;
-wire [63:0]imm_data1;
 
 wire [63:0]Result;
 
@@ -56,16 +55,17 @@ Instruction_Memory imm(
     .Inst_Address(PC_Out),
     .Instruction(Instruction)
 );
-
+// PC + 4
 adder a1(
     .a(PC_Out),
     .b(64'd4),
     .out(out)
 );
 
+// PC + Imm data
 adder a2(
     .a(PC_Out),
-    .b(imm_data1),
+    .b(imm_data << 1),
     .out(out1)
 );
 
@@ -81,7 +81,7 @@ InstructionParser ip(
     .rs2(rs2),
     .funct7(funct7)
 );
-
+// *  dataout1 is data sent by WB 
 registerFile rf(
     .clk(clk),
     .reset(reset),
@@ -113,6 +113,7 @@ alu_64 a(
     .Zero(Zero)
 );
 
+//  MUX between Register file and ALU
 MUX2x1 m1(
     .a(ReadData2),
     .b(imm_data),
@@ -120,12 +121,13 @@ MUX2x1 m1(
     .data_out(data_out)
 );
 
+// Immediate Data Extractor
 dataExtract dE(
     .instruction(Instruction),
     .imm_data(imm_data)
 );
 
-assign imm_data1 = imm_data << 1;
+
 
 data_memory dm(
     .Mem_Addr(Result),
@@ -136,6 +138,7 @@ data_memory dm(
     .Read_Data(Read_Data)
 );
 
+// * MUX after Data memory
 MUX2x1 m2(
     .a(Result),
     .b(Read_Data),
@@ -143,12 +146,14 @@ MUX2x1 m2(
     .data_out(data_out1)
 );
 
+
 ALU_Control aa(
     .ALUOp(ALUop),
     .Funct({Instruction[30],Instruction[14:12]}),
     .Operation(Operation)
 );
 
+// Choose whether to +4 or add imm
 MUX2x1 m3(
     .a(out),
     .b(out1),
