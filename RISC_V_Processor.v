@@ -158,7 +158,7 @@ ALU_control aa(
 MUX2x1 m3(
     .a(out),
     .b(out1),
-    .sel(andGateOut),
+    .sel(Branch & (Zero | (GreaterThanEqualZero & funct3[2]))),
     .data_out(data_out2)
 );
 

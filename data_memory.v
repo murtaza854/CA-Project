@@ -20,7 +20,8 @@ end
 
 always @(*) begin
     if (MemRead)
-        Read_Data = {Array[Mem_Addr + 7], Array[Mem_Addr + 6], Array[Mem_Addr + 5], Array[Mem_Addr + 4], Array[Mem_Addr + 3], Array[Mem_Addr + 2], Array[Mem_Addr + 1], Array[Mem_Addr]};
+        Read_Data= 1;
+        // Read_Data = {Array[Mem_Addr + 7], Array[Mem_Addr + 6], Array[Mem_Addr + 5], Array[Mem_Addr + 4], Array[Mem_Addr + 3], Array[Mem_Addr + 2], Array[Mem_Addr + 1], Array[Mem_Addr]};
 end
 
 always @(posedge clk) begin
