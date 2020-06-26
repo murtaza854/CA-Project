@@ -41,7 +41,7 @@ wire [63:0]Read_Data;
 wire [3:0]Operation;
 
 wire Zero;
-
+wire GreaterThanEqualZero;
 wire andGateOut;
 
 program_counter pc (
@@ -69,7 +69,7 @@ adder a2(
     .out(out1)
 );
 
-assign andGateOut = Branch & Zero;
+assign andGateOut = Branch & (Zero | (GreaterThanEqualZero & funct3[2]));
 
 
 InstructionParser ip(
@@ -110,7 +110,8 @@ alu_64 a(
     .b(data_out),
     .ALUOp(Operation),
     .Result(Result),
-    .Zero(Zero)
+    .Zero(Zero),
+    .GreaterThanEqualZero(GreaterThanEqualZero) // ! Added Greater than Zero
 );
 
 //  MUX between Register file and ALU

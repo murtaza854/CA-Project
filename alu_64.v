@@ -1,7 +1,7 @@
 module alu_64(
     input [63:0]a, [63:0]b, [3:0]ALUOp,
     output [63:0]Result,
-    output reg Zero
+    output reg Zero, GreaterThanEqualZero // ! Line Changed
 );
 
 reg [63:0]result;
@@ -17,6 +17,7 @@ always @(*) begin
             default: result = 0;
         endcase
         Zero <= result ? 0:1;
+        GreaterThanEqualZero <= result[63] ? 0 : 1; // ! Line added
     end
 end
 
