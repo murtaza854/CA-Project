@@ -6,4 +6,4 @@ view wave
 
 add wave -r /*
 
-run 300ns
+run 70ns

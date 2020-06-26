@@ -20,12 +20,12 @@ end
 
 always @(*) begin
     if (MemRead)
-        Read_Data= 1;
-        // Read_Data = {Array[Mem_Addr + 7], Array[Mem_Addr + 6], Array[Mem_Addr + 5], Array[Mem_Addr + 4], Array[Mem_Addr + 3], Array[Mem_Addr + 2], Array[Mem_Addr + 1], Array[Mem_Addr]};
+        Read_Data = {Array[Mem_Addr + 7], Array[Mem_Addr + 6], Array[Mem_Addr + 5], Array[Mem_Addr + 4], Array[Mem_Addr + 3], Array[Mem_Addr + 2], Array[Mem_Addr + 1], Array[Mem_Addr]};
 end
 
 always @(posedge clk) begin
     if (MemWrite)
+    begin
         Array[Mem_Addr] = Write_Data[7:0];
     Array[Mem_Addr + 1] = Write_Data[15:8];
     Array[Mem_Addr + 2] = Write_Data[23:16];
@@ -34,6 +34,8 @@ always @(posedge clk) begin
     Array[Mem_Addr + 5] = Write_Data[47:40];
     Array[Mem_Addr + 6] = Write_Data[55:48];
     Array[Mem_Addr + 7] = Write_Data[63:56];
+    end
+        
 end
 
 endmodule // data_memory 

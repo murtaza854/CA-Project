@@ -14,7 +14,7 @@ initial
 begin
 clk = 1'b0;
 reset = 1'b1;
-#10
+#8
 reset = 1'b0;
 end
 
