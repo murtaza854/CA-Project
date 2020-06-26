@@ -1,0 +1,53 @@
+#task 1 d
+#a =x21
+#i =x22
+#j =x23
+#temp=x5
+#offsetted address i=x6
+#offsetted address j=x7
+#a[i] = x28
+#a[j] =x29
+#lim =10 = x30 
+addi x21,x0,0x200 #initializing a
+add x22,x0,x0 #initializing i
+
+addi x30,x0,10 # lim=10
+loop:
+    bge x22,x30,exit
+    slli x6, x22,2  # do offset
+    add x6,x21,x6 # add address to offset to get offsetted address
+    sw x22,0(x6) #i = offsetted address
+    addi x22,x22,1 #inc i
+    beq x0,x0,loop
+exit:
+
+
+add x22,x0,x0 #initializing i
+loopi:
+    bge x22,x30,Exit
+    add x23,x0,x22
+    slli x6, x22,2  # do offset i
+    add x6,x21,x6 # add address to offset to get offsetted address
+loopj:
+	bge x23,x30,iInc
+    slli x7, x23,2  # do offset j
+    add x7,x21,x7 # add address to offset to get offsetted address
+    lw x28,0(x6)
+    lw x29,0(x7)
+    bge x28,x29,CompareFalse
+
+add x5,x0,x28
+sw x29,0(x6)
+sw x5,0(x7)
+CompareFalse:
+    addi x23,x23,1
+    beq x0,x0,loopj
+
+iInc:
+	addi x22,x22,1
+    beq x0,x0,loopi
+
+Exit:
+
+
+
