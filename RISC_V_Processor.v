@@ -148,10 +148,10 @@ MUX2x1 m2(
 );
 
 
-ALU_Control aa(
+ALU_control aa(
     .ALUOp(ALUop),
-    .Funct({Instruction[30],Instruction[14:12]}),
-    .Operation(Operation)
+    .funct({Instruction[30],Instruction[14:12]}),
+    .operation(Operation)
 );
 
 // Choose whether to +4 or add imm
