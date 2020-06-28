@@ -1,8 +1,8 @@
 module Control_Unit
 (
-    input [6:0]Opcode,
+    input [6:0]Opcode,[2:0] Funct3,
     output [1:0]ALUop,
-    output MemRead, MemtoReg, MemWrite, ALUSrc, RegWrite, Branch
+    output MemRead, MemtoReg, MemWrite, ALUSrc, RegWrite, Branch,BranchGeq
 );
 
 reg [1:0]ALUop1;
@@ -72,5 +72,5 @@ assign MemRead = MemRead1;
 assign MemWrite = MemWrite1;
 assign Branch = Branch1;
 assign ALUop = ALUop1;
-
+assign BranchGeq = Funct3[2];
 endmodule // Control_Unit

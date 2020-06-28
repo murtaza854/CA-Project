@@ -42,8 +42,8 @@ wire [3:0]Operation;
 
 wire Zero;
 wire GreaterThanEqualZero;
-wire andGateOut;
-
+// // wire andGateOut;
+wire BranchGeq; // ! Added
 program_counter pc (
     .PC_In(data_out2),
     .reset(reset),
@@ -69,8 +69,8 @@ adder a2(
     .out(out1)
 );
 
-assign andGateOut = Branch & (Zero | (GreaterThanEqualZero & funct3[2]));
-
+// // assign andGateOut = Branch & (Zero | (GreaterThanEqualZero & BranchGeq)); // * Whether to jump or not. If branch is on and zero or branch is on. Greater than equals zero and funct3 is 1 meaning jump. Is stupid
+// ! Branch Geq added
 
 InstructionParser ip(
     .instruction(Instruction),
@@ -96,13 +96,15 @@ registerFile rf(
 
 Control_Unit cu(
     .Opcode(opcode),
+    .Funct3(funct3), // ! Added
     .Branch(Branch),
     .MemRead(MemRead),
     .MemtoReg(MemtoReg),
     .ALUop(ALUop),
     .MemWrite(MemWrite),
     .ALUSrc(ALUSrc),
-    .RegWrite(RegWrite)
+    .RegWrite(RegWrite),
+    .BranchGeq(BranchGeq)
 );
 
 alu_64 a(
@@ -158,7 +160,7 @@ ALU_control aa(
 MUX2x1 m3(
     .a(out),
     .b(out1),
-    .sel(Branch & (Zero | (GreaterThanEqualZero & funct3[2]))),
+    .sel(Branch & (Zero | (GreaterThanEqualZero & BranchGeq))),
     .data_out(data_out2)
 );
 
