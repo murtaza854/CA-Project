@@ -1,0 +1,23 @@
+module PipelineRegisterIDEX(
+    input Zero, GreaterThanZero,MemRead, MemtoReg, MemWrite, RegWrite, Branch,BranchGeq,clk,maintain,[63:0]WriteData, [63:0] Address, [4:0]WriteReg,[63:0] ALUResult,
+    output reg Zero,reg GreaterThanZero,reg OutMemRead,reg OutMemtoReg,reg OutMemWrite, reg OutRegWrite,reg OutBranch, reg OutBranchGeq, reg [63:0] OutWriteData,  reg [63:0] OutImm,reg [63:0] OutAddress,reg  [4:0]OutWriteReg, reg [63:0] OutALUResult
+);
+
+always @(posedge maintain or posedge clk)
+begin
+  if (!maintain & clk)
+  begin
+      OutMemRead=MemRead;
+      OutMemtoReg=MemtoReg;
+      OutMemWrite=MemWrite;
+      OutRegWrite=RegWrite;
+      OutBranch=Branch;
+      OutBranchGeq=BranchGeq;
+      OutWriteData=WriteData;
+      OutAddress=Address;
+      OutWriteReg=WriteReg;
+      OutALUResult=ALUResult;
+  end 
+end
+
+endmodule // PipelineRegisterIDEX

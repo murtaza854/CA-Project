@@ -12,7 +12,7 @@ RISC_V_Processor r(
 
 initial
 begin
-clk = 1'b0;
+clk = 1'b1;
 reset = 1'b1;
 #8
 reset = 1'b0;
