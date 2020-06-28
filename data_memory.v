@@ -9,9 +9,9 @@ reg [7:0] Array[63:0];
 initial
 begin
 {Array[63], Array[62], Array[61], Array[60], Array[59], Array[58], Array[57], Array[56]} = 64'h6;
-{Array[55], Array[54], Array[53], Array[52], Array[51], Array[50], Array[49], Array[48]} = 64'h12;
+{Array[55], Array[54], Array[53], Array[52], Array[51], Array[50], Array[49], Array[48]} = 64'h9;
 {Array[47], Array[46], Array[45], Array[44], Array[43], Array[42], Array[41], Array[40]} = 64'h10;
-{Array[39], Array[38], Array[37], Array[36], Array[35], Array[34], Array[33], Array[32]} = 64'h50;
+{Array[39], Array[38], Array[37], Array[36], Array[35], Array[34], Array[33], Array[32]} = 64'h4;
 {Array[31], Array[30], Array[29], Array[28], Array[27], Array[26], Array[25], Array[24]} = 64'h5;
 {Array[23], Array[22], Array[21], Array[20], Array[19], Array[18], Array[17], Array[16]} = 64'h9;
 {Array[15], Array[14], Array[13], Array[12], Array[11], Array[10], Array[9], Array[8]} = 64'h15;

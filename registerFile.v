@@ -19,9 +19,9 @@ initial Register[7] = 64'd0;
 initial Register[8] = 64'd0;
 initial Register[9] = 64'd00;
 initial Register[10] = 64'd0;
-initial Register[11] = 64'd00;
+initial Register[11] = 64'd1;
 initial Register[12] = 64'd00;
-initial Register[13] = 64'd10;
+initial Register[13] = 64'd00;
 initial Register[14] = 64'd00;
 initial Register[15] = 64'd00;
 initial Register[16] = 64'd00;
@@ -46,7 +46,7 @@ always @(posedge clk) begin
         Register[RD] = WriteData;
 end
 
-always @(reset,RS1,RS2,Register) begin
+always @(*) begin
     if (reset == 1)
         begin
             ReadDatareg1 = 64'd0;
